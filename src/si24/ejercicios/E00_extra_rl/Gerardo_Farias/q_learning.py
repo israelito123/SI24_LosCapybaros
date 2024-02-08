@@ -1,7 +1,12 @@
 import gymnasium as gym
 import numpy as np
+import wandb
 a = 0
 
+run = wandb.init(
+    # Set the project where this run will be logged
+    project="SI24",
+)
 class RandomAgent:
     def __init__(self, env, alpha=0.1, gamma=0.9, epsilon=0.1):
         self.env = env
@@ -49,7 +54,7 @@ if __name__ == "__main__":
     # 3. ejecuta el script para ver el comportamiento del agente
     # 4. Implementa una técnica para reducir la exploración conforme el agente aprende
     # https://gymnasium.farama.org/environments/toy_text/cliff_walking/
-    env = gym.make("CliffWalking-v0", render_mode="human")
+    env = gym.make("CliffWalking-v0")
 
     n_episodes = 1000
     episode_length = 200
@@ -74,9 +79,9 @@ if __name__ == "__main__":
         # TODO: Implementa algun código para reducir la exploración del agente conforme aprende
         # puedes decidir hacerlo por episodio, por paso del tiempo, retorno promedio, etc.
 
-        a = a + 0.05
+        a += 0.001
         agent = QLearningAgent(env, alpha=0.1, gamma=0.9,epsilon= 0.9-a)
 
-
-        print(f"Episode {e} return: ", ep_return)
+        wandb.log({"Episode": e, "Return": ep_return})
+        # print(f"Episode {e} return: ", ep_return)
     env.close()
