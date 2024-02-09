@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-dir_to_ignore/C:\Users\faria\Documents\Sem6\SI24_LosCapybaros\src\si24\ejercicios\wandb
+dir_to_ignore/C:\Users\faria\Documents\Sem6\SI24_LosCapybaros\src\si24\ejercicios\wandb\.gitignore
 
 # C extensions
 *.so
