@@ -2,8 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
-dir_to_ignore/src\si24\ejercicios\wandb\.gitignore
+src/si24/ejercicios/wandb
 
 # C extensions
 *.so
