@@ -132,7 +132,6 @@ dmypy.json
 
 #
 /.vscode
-*.csv
 *.pth
 */models/*.pt
 */data/
