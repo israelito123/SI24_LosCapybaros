@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "si24"
+version = "0.0.1"
+dependencies = [
+    "datasets",
+    "numpy",
+    "pandas",
+    "matplotlib",
+    "scikit-learn",
+    "ipykernel",
+    "ipympl",
+    "notebook",
+    "scipy",
+    "gymnasium>=0.26.3",
+    "gymnasium[classic_control]",
+    "scikit-fuzzy",
+]
+[packages]
+# Specify your packages here
+# For example:
+si24 = { version = "*", path = "src/si24" }
+
+[options]
+python_requires = ">=3.8"
+include_package_data = true
