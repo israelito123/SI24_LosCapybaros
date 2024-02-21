@@ -74,14 +74,13 @@ if __name__ == "__main__":
                 break
             ep_return += reward
             obs = next_obs
-            print(agent.Q)
             env.render()
         # TODO: Implementa algun código para reducir la exploración del agente conforme aprende
         # puedes decidir hacerlo por episodio, por paso del tiempo, retorno promedio, etc.
 
         a += 0.001
         agent = QLearningAgent(env, alpha=0.1, gamma=0.9,epsilon= 0.9-a)
-
+        print(a)
         wandb.log({"Episode": e, "Return": ep_return})
         # print(f"Episode {e} return: ", ep_return)
     env.close()
