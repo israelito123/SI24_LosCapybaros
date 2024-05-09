@@ -14,7 +14,7 @@ import pandas as pd
 import cv2
 import os
 import numpy as np
-from utils import to_numpy, to_torch, add_img_text, get_transforms
+from utils import create_train_val_split, to_numpy, to_torch, add_img_text, get_transforms
 import json
 
 EMOTIONS_MAP = {
@@ -73,6 +73,8 @@ class FER2013(Dataset):
             split=self.split,
             img_size=self.img_size
         )
+
+        create_train_val_split()
 
         df = self._read_data()
         _str_to_array = [np.fromstring(val,  dtype=int, sep=' ')
