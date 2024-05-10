@@ -1,6 +1,7 @@
 import datetime as dt
 import pathlib
 import matplotlib
+import torch
 import matplotlib.pyplot as plt
 file_path = pathlib.Path(__file__).parent.absolute()
 
@@ -14,10 +15,12 @@ class PlotLosses():
         
         self.logs = []
 
-    def on_epoch_end(self, train_loss, val_loss):  
+    def on_epoch_end(self, train_loss, val_loss):
+ 
         self.x.append(self.i)
         self.losses.append(train_loss)
         self.val_losses.append(val_loss)
+        self.val_losses
         self.i += 1
         plt.cla()
         plt.plot(self.x, self.losses, label="Costo de entrenamiento promedio")

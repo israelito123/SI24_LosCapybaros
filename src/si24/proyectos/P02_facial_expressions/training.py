@@ -46,8 +46,8 @@ def validation_step(val_loader, net, cost_function):
 
 def train():
     # Hyperparametros
-    learning_rate = 1e-4
-    n_epochs=100
+    learning_rate = 5e-4
+    n_epochs=15
     batch_size = 256
 
     # Train, validation, test loaders
@@ -70,7 +70,7 @@ def train():
     criterion = nn.CrossEntropyLoss()
 
     # Define el optimizador
-    optimizer = optim.Adam(modelo.parameters(), lr=learning_rate,betas=(0.9,0.999),eps=5e-3)
+    optimizer = optim.Adam(modelo.parameters(), lr=learning_rate,betas=(0.9,0.999),eps=4e-4)
 
     best_epoch_loss = np.inf
     mejorCosto = 0
@@ -105,6 +105,7 @@ def train():
             mejorCosto = val_loss
             modelo.save_model(model_name="Entrenado")
 
+        val_loss = torch.Tensor.numpy(val_loss, force = True) 
         plotter.on_epoch_end(train_loss, val_loss)
     plotter.on_train_end()
 
