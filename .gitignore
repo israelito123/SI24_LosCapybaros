@@ -134,4 +134,6 @@ dmypy.json
 /.vscode
 *.pth
 */models/*.pt
-*/data/
+*/data/*
+src/si24/proyectos/P02_facial_expressions/data/*
+src/si24/ejercicios/E08_cnn/data/
