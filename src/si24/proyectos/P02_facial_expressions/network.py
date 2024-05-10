@@ -27,20 +27,19 @@ class Network(nn.Module):
 
         #shape 1x48x48
     
-        self.layer1 = nn.Conv2d(1,  out_channels=64,      kernel_size=3) # 46
+        self.layer1 = nn.Conv2d(1, out_channels=32, kernel_size=4) # 45
         self.ReLU1 = nn.ReLU()
         
-
-        self.layer2 = nn.Conv2d(64,         out_channels=128,     kernel_size=3) # 44
+        self.layer2 = nn.Conv2d(32, out_channels=64, kernel_size=4) # 42
         self.ReLU2 = nn.ReLU()
-        self.maxPool1 = nn.MaxPool2d(kernel_size=2) #22
+        self.maxPool1 = nn.MaxPool2d(kernel_size=2) #21
 
-        self.layer3 = nn.Conv2d(128,        out_channels=128 ,    kernel_size=3) # 20
+        self.layer3 = nn.Conv2d(64, out_channels=128, kernel_size=2) # 20
         self.ReLU3 = nn.ReLU()
         self.maxPool2 = nn.MaxPool2d(kernel_size=2) # 10
 
-        self.fc1 = nn.Linear(10 * 10 * 128, 1024)
-        self.fc2 = nn.Linear(1024 , n_classes)
+        self.fc1 = nn.Linear(10 * 10 * 128, 512)
+        self.fc2 = nn.Linear(512 , n_classes)
         self.softmax = nn.Softmax(dim=1)
 
         self.to(self.device)
@@ -52,9 +51,8 @@ class Network(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor: 
         # TODO: Define la propagacion hacia adelante de tu red ✅
-        
         x = self.layer1(x)
-       # print(x.size())
+        # print(x.size())
         x = F.relu(x)
         x = self.layer2(x)
         #print(x.size())
@@ -74,21 +72,27 @@ class Network(nn.Module):
         return x
     
     def forward_inference(self, x: torch.Tensor) -> torch.Tensor: 
-
+        x = x.cuda()
         x = self.layer1(x)
+        # print(x.size())
         x = F.relu(x)
         x = self.layer2(x)
+        #print(x.size())
         x = F.relu(x)
+        x = F.max_pool2d(x,kernel_size=2)
         x = self.layer3(x)
+       # print(x.size())
         x = F.relu(x)
+        x = F.max_pool2d(x,kernel_size=2)
         x = torch.flatten(x)
+        #print(x.size())
         x = self.fc1(x)
         x = F.relu(x)
         x = self.fc2(x)
+        
+        logits = x
 
-        logs = x
-
-        return logs
+        return logits
 
     def predict(self, x):
         with torch.inference_mode():
