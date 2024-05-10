@@ -70,8 +70,6 @@ class Network(nn.Module):
         x = F.relu(x)
         x = self.fc2(x)
 
-
-
         #return x, logits, proba #Logits: Raw outputs from final layer, aqui habia return x
         return x
     

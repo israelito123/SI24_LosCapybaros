@@ -73,7 +73,7 @@ def train():
     optimizer = optim.Adam(modelo.parameters(), lr=learning_rate,betas=(0.9,0.999),eps=4e-4)
 
     best_epoch_loss = np.inf
-    mejorCosto = 0
+    mejorCosto = 10e20
     for epoch in range(n_epochs):
         train_loss = 0
         for i, batch in enumerate(tqdm(train_loader, desc=f"Epoch: {epoch}")):
