@@ -14,14 +14,14 @@ class PlotLosses():
         
         self.logs = []
 
-    def on_epoch_end(self, epoch, train_loss, val_loss):        
+    def on_epoch_end(self, train_loss, val_loss):  
         self.x.append(self.i)
         self.losses.append(train_loss)
         self.val_losses.append(val_loss)
         self.i += 1
         plt.cla()
         plt.plot(self.x, self.losses, label="Costo de entrenamiento promedio")
-        plt.plot(self.x, self.val_losses, label="Costo de validación promedio")
+        plt.plot(self.x, self.val_losses, label="Costo de validaciÃ³n promedio")
         plt.xlabel('epochs')
         plt.ylabel('Loss')
         plt.legend()
