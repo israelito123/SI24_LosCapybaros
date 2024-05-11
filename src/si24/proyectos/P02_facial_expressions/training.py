@@ -46,9 +46,9 @@ def validation_step(val_loader, net, cost_function):
 
 def train():
     # Hyperparametros
-    learning_rate = 5e-4
-    n_epochs=15
-    batch_size = 256
+    learning_rate = 5e-3
+    n_epochs=25
+    batch_size = 512
 
     # Train, validation, test loaders
     train_dataset, train_loader = \
@@ -73,7 +73,7 @@ def train():
     optimizer = optim.Adam(modelo.parameters(), lr=learning_rate,betas=(0.9,0.999),eps=4e-4)
 
     best_epoch_loss = np.inf
-    mejorCosto = 0
+    mejorCosto = 10e20
     for epoch in range(n_epochs):
         train_loss = 0
         for i, batch in enumerate(tqdm(train_loader, desc=f"Epoch: {epoch}")):
@@ -104,6 +104,7 @@ def train():
         if (val_loss < mejorCosto):
             mejorCosto = val_loss
             modelo.save_model(model_name="Entrenado")
+            print("Se ha guardado un nuevo modelo")
 
         val_loss = torch.Tensor.numpy(val_loss, force = True) 
         plotter.on_epoch_end(train_loss, val_loss)

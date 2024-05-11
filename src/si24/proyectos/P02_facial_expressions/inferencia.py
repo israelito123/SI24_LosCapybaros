@@ -34,7 +34,7 @@ def predict(img_title_paths):
         original, transformed, denormalized = load_img(im_file)
 
         # Inferencia
-        logits, proba = modelo.predict(transformed)
+        proba = modelo.predict(transformed)
         pred = torch.argmax(proba, -1).item()
         pred_label = EMOTIONS_MAP[pred]
 
@@ -53,5 +53,26 @@ def predict(img_title_paths):
 
 if __name__=="__main__":
     # Direcciones relativas a este archivo
-    img_paths = ["./test_imgs/happy.png"]
+
+
+    img_paths = ["./test_imgs/30.jpg","./test_imgs/31.jpg",
+            "./test_imgs/29.jpg","./test_imgs/28.jpg",
+            "./test_imgs/27.jpg","./test_imgs/26.jpg",
+            "./test_imgs/25.jpg","./test_imgs/24.jpg",
+            "./test_imgs/23.jpg","./test_imgs/22.jpg",
+            "./test_imgs/20.jpg","./test_imgs/19.jpg",
+            "./test_imgs/17.jpg","./test_imgs/21.jpg",
+            "./test_imgs/16.jpg","./test_imgs/15.jpg",
+            "./test_imgs/14.jpg","./test_imgs/13.jpg",
+            "./test_imgs/12.jpg","./test_imgs/11.jpg",
+            "./test_imgs/10.jpg","./test_imgs/9.jpg",
+            "./test_imgs/8.jpg","./test_imgs/7.jpg",
+            "./test_imgs/6.jpg","./test_imgs/5.jpg",
+            "./test_imgs/4.jpg","./test_imgs/2.jpg",
+            "./test_imgs/1.jpg","./test_imgs/happy.png",
+            "./test_imgs/happy2.png","./test_imgs/happy3.png",
+            "./test_imgs/mad.png","./test_imgs/neutral.png",
+            "./test_imgs/neutral2.png","./test_imgs/scared.png"]
+    
+
     predict(img_paths)
