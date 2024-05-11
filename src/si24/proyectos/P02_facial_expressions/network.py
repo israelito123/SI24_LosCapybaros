@@ -33,7 +33,7 @@ class Network(nn.Module):
 
         self.layer2 = nn.Conv2d(16,         out_channels=32,     kernel_size=3) # 44
         self.ReLU2 = nn.ReLU()
-        self.maxPool1 = nn.MaxPool2d(kernel_size=2) #22
+        self.maxPool1 = nn.MaxPool2d(kernel_size=2) #21
 
         self.layer3 = nn.Conv2d(32,        out_channels=32 ,    kernel_size=3) # 20
         self.ReLU3 = nn.ReLU()
@@ -52,9 +52,8 @@ class Network(nn.Module):
 
     def forward(self, x: torch.Tensor) -> torch.Tensor: 
         # TODO: Define la propagacion hacia adelante de tu red ✅
-        
         x = self.layer1(x)
-       # print(x.size())
+        # print(x.size())
         x = F.relu(x)
         x = self.layer2(x)
         #print(x.size())
@@ -70,28 +69,30 @@ class Network(nn.Module):
         x = F.relu(x)
         x = self.fc2(x)
 
-
-
         #return x, logits, proba #Logits: Raw outputs from final layer, aqui habia return x
         return x
     
     def forward_inference(self, x: torch.Tensor) -> torch.Tensor: 
         x = x.cuda()
         x = self.layer1(x)
+        # print(x.size())
         x = F.relu(x)
 
         x = self.layer2(x)
+        #print(x.size())
         x = F.relu(x)
         x = F.max_pool2d(x,kernel_size=2)
-
         x = self.layer3(x)
+       # print(x.size())
         x = F.relu(x)
         x = F.max_pool2d(x,kernel_size=2)
-
         x = torch.flatten(x)
+        #print(x.size())
         x = self.fc1(x)
         x = F.relu(x)
         x = self.fc2(x)
+        
+        logits = x
 
         logits = x
 
